@@ -29,6 +29,12 @@ zle -N bracketed-paste bracketed-paste-url-magic
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
+# zsh-bench
+path=(
+  $path
+  $ZPLUGINDIR/zsh-bench(/N)
+)
+
 # Load more specific 'run-help' function from $fpath.
 (( $+aliases[run-help] )) && unalias run-help && autoload -Uz run-help
 alias help=run-help
