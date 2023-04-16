@@ -53,6 +53,7 @@ plugins=(
   # local plugins
   color
   homebrew
+  python
   utility
   zfunctions
   xdg
