@@ -34,8 +34,9 @@ PREZTORC=$ZPLUGINDIR/prezto/runcoms
 plugins=(
   # remote plugins
   mattmc3/zman
-  #agkozak/zsh-z
-  rupa/z
+  zshzoo/macos
+  agkozak/zsh-z
+  #rupa/z
 
   # framework plugins
   $OMZLIB/clipboard.zsh
@@ -43,6 +44,7 @@ plugins=(
   $OMZ/copypath
   $OMZ/copybuffer
   $OMZ/magic-enter
+  $OMZ/fancy-ctrl-z
   $OMZ/extract
   $PREZTORC/zprofile
   $PREZTO/terminal
