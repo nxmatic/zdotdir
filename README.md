@@ -10,14 +10,13 @@ My `$ZDOTDIR` [dotfiles] directory, which contains my zsh configuration.
 
 I like my Zsh to behave like [Fish][fish], so there's a lot of features that will be very familiar to other Fish users.
 
-- A functions directory for my custom functions
-- A completions directory for my custom functions
-- A conf.d directory so that .zshrc isn't a cluttered mess
+- A functions directory for my custom autoload functions
+- A conf.d directory for sourcing additional .zshrc content
 - A plugins directory similar to [oh-my-zsh] for adding/removing shell features
 
 ## Installation
 
-Since this is my personal `$ZDOTDIR`, this installation procedure is mostly for my personal use.
+Since this is my personal `$ZDOTDIR`, this installation procedure is for my personal use.
 
 It's a good idea to backup existing files first:
 
@@ -35,7 +34,7 @@ done
 unset zfile zfiles
 ```
 
-Install this dotfiles repo to your `$ZDOTDIR`:
+Install this dotfiles repo to `$ZDOTDIR`:
 
 ```zsh
 # set the amazing ZDOTDIR variable
@@ -45,10 +44,7 @@ export ZDOTDIR=~/.config/zsh
 git clone --recursive git@github.com:mattmc3/zdotdir.git $ZDOTDIR
 
 # change the root .zshenv file to use ZDOTDIR
-cat << 'EOF' >| ~/.zshenv
-export ZDOTDIR=~/.config/zsh
-[[ -f $ZDOTDIR/.zshenv ]] && . $ZDOTDIR/.zshenv
-EOF
+ln -sf $ZDOTDIR/.zshenv ~/.zshenv
 
 # load zsh
 zsh
