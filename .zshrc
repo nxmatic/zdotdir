@@ -15,10 +15,9 @@ autoload -Uz $fpath[1]/*(.:t)
   git clone git@github.com:mattmc3/zsh_unplugged $ZDOTDIR/.unplugged
 #source $ZDOTDIR/.unplugged/zsh_unplugged.zsh
 source ~/Projects/mattmc3/zsh_unplugged/zsh_unplugged.zsh
-ZPLUGINDIR=${XDG_DATA_HOME:=~/.local/share}/zsh_unplugged
 
 # clone-only plugins
-path+=$ZPLUGINDIR/romkatv/zsh-bench
+path+=$ZUNPLUG_REPOS/romkatv/zsh-bench
 (( $+commands[zsh-bench] )) || plugin-clone romkatv/zsh-bench
 
 # load plugins
@@ -70,7 +69,8 @@ plugins=(
   # deferred
   romkatv/zsh-defer
   olets/zsh-abbr
-  zdharma-continuum/fast-syntax-highlighting
+  #zdharma-continuum/fast-syntax-highlighting
+  zsh-users/zsh-syntax-highlighting
   zsh-users/zsh-autosuggestions
   zsh-users/zsh-history-substring-search
 )
