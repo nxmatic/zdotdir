@@ -6,51 +6,47 @@
 alias zprofrc="ZPROFRC=1 zsh"
 alias zbench='for i in {1..10}; do /usr/bin/time zsh -lic exit; done'
 
-# Load zstyles.
-[[ -f $ZDOTDIR/.zstyles ]] && source $ZDOTDIR/.zstyles
+# Load zfunctions.
+fpath=($ZDOTDIR/functions $fpath)
+autoload -Uz $fpath[1]/*(.:t)
 
 # get minmalist zsh_unplugged plugin manager
 [[ -d $ZDOTDIR/.unplugged ]] ||
   git clone git@github.com:mattmc3/zsh_unplugged $ZDOTDIR/.unplugged
-source $ZDOTDIR/.unplugged/unplugged.zsh
-ZPLUGINDIR=$ZDOTDIR/plugins/.external
+#source $ZDOTDIR/.unplugged/zsh_unplugged.zsh
+source ~/Projects/mattmc3/zsh_unplugged/zsh_unplugged.zsh
+ZPLUGINDIR=${XDG_DATA_HOME:=~/.local/share}/zsh_unplugged
 
-# get frameworks
-utils=(
-  ohmyzsh/ohmyzsh
-  sorin-ionescu/prezto
-  romkatv/zsh-bench
-  romkatv/gitstatus
-)
-plugin-clone $utils
-
-# framework vars
-OMZLIB=$ZPLUGINDIR/ohmyzsh/lib
-OMZ=$ZPLUGINDIR/ohmyzsh/plugins
-PREZTO=$ZPLUGINDIR/prezto/modules
-PREZTORC=$ZPLUGINDIR/prezto/runcoms
+# clone-only plugins
+path+=$ZPLUGINDIR/romkatv/zsh-bench
+(( $+commands[zsh-bench] )) || plugin-clone romkatv/zsh-bench
 
 # load plugins
 plugins=(
-  # remote plugins
-  mattmc3/zman
-  zshzoo/macos
-  agkozak/zsh-z
-  #rupa/z
+  # Load customizations.
+  $ZDOTDIR/.zstyles
 
-  # framework plugins
-  $OMZLIB/clipboard.zsh
-  $OMZ/copyfile
-  $OMZ/copypath
-  $OMZ/copybuffer
-  $OMZ/magic-enter
-  $OMZ/fancy-ctrl-z
-  $OMZ/extract
-  $PREZTORC/zprofile
-  $PREZTO/terminal
-  $PREZTO/editor
-  $PREZTO/history
-  $PREZTO/directory
+  # regular plugins
+  mattmc3/zfunctions
+  mattmc3/zman
+  rupa/z
+
+  # oh-my-zsh plugins
+  ohmyzsh/ohmyzsh/lib/clipboard.zsh
+  ohmyzsh/ohmyzsh/plugins/copyfile
+  ohmyzsh/ohmyzsh/plugins/copypath
+  ohmyzsh/ohmyzsh/plugins/copybuffer
+  ohmyzsh/ohmyzsh/plugins/magic-enter
+  ohmyzsh/ohmyzsh/plugins/fancy-ctrl-z
+  ohmyzsh/ohmyzsh/plugins/extract
+
+  # prezto replacements
+  zshzoo/environment
+  zshzoo/terminal
+  zshzoo/editor
+  zshzoo/history
+  zshzoo/directory
+  zshzoo/macos
 
   # local plugins
   color
@@ -66,19 +62,19 @@ plugins=(
 
   # last
   confd
+  $ZDOTDIR/.zaliases
   zsh-users/zsh-completions
-  $PREZTO/completion
+  zshzoo/compinit
+  zshzoo/compstyle
 
   # deferred
   romkatv/zsh-defer
+  olets/zsh-abbr
   zdharma-continuum/fast-syntax-highlighting
   zsh-users/zsh-autosuggestions
   zsh-users/zsh-history-substring-search
 )
 plugin-load $plugins
-
-# Load zaliases.
-[[ -f $ZDOTDIR/.zaliases ]] && source $ZDOTDIR/.zaliases
 
 # Done profiling.
 [[ ${ZPROFRC:-0} -eq 0 ]] || { unset ZPROFRC && zprof }
