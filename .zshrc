@@ -39,28 +39,35 @@ plugins=(
   ohmyzsh/ohmyzsh/plugins/fancy-ctrl-z
   ohmyzsh/ohmyzsh/plugins/extract
 
-  # prezto replacements
-  zshzoo/environment
-  zshzoo/terminal
-  zshzoo/editor
-  zshzoo/history
-  zshzoo/directory
+  # prezto
+  sorin-ionescu/prezto/runcoms/zprofile
+  sorin-ionescu/prezto/modules/terminal
+  sorin-ionescu/prezto/modules/editor
+  sorin-ionescu/prezto/modules/directory
+
+  # zsh-utils
+  belak/zsh-utils/history
+
+  # zephyr
+  mattmc3/zephyr/plugins/color
+  mattmc3/zephyr/plugins/homebrew
+  mattmc3/zephyr/plugins/utility
+  #zshzoo/environment
+  #zshzoo/terminal
+  #zshzoo/editor
+  #zshzoo/history
+  #zshzoo/directory
   zshzoo/macos
 
   # local plugins
-  color
-  homebrew
   python
-  utility
-  zfunctions
-  xdg
 
   # prompt
-  # sindresorhus/pure
-  starship
+  sindresorhus/pure
+  #starship
 
   # last
-  confd
+  mattmc3/zephyr/plugins/confd
   $ZDOTDIR/.zaliases
   zsh-users/zsh-completions
   zshzoo/compinit
@@ -69,8 +76,8 @@ plugins=(
   # deferred
   romkatv/zsh-defer
   olets/zsh-abbr
-  #zdharma-continuum/fast-syntax-highlighting
-  zsh-users/zsh-syntax-highlighting
+  zdharma-continuum/fast-syntax-highlighting
+  #zsh-users/zsh-syntax-highlighting
   zsh-users/zsh-autosuggestions
   zsh-users/zsh-history-substring-search
 )

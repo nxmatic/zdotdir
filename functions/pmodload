@@ -1,5 +1,0 @@
-#!/bin/zsh
-function pmodload {
-  # no-op
-}
-pmodload "$@"

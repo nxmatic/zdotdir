@@ -6,10 +6,10 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-$HOME/.xdg}
 
-for xdgdir in XDG_{CONFIG,CACHE,DATA,STATE}_HOME XDG_RUNTIME_DIR; do
-  [[ -e ${(P)xdgdir} ]] || mkdir -p ${(P)xdgdir}
+for _xdgdir in XDG_{CONFIG,CACHE,DATA,STATE}_HOME XDG_RUNTIME_DIR; do
+  [[ -e ${(P)_xdgdir} ]] || mkdir -p ${(P)_xdgdir}
 done
-unset xdgdir
+unset _xdgdir
 
 if [[ "$OSTYPE" == darwin* ]]; then
   export XDG_DESKTOP_DIR=${XDG_DESKTOP_DIR:-$HOME/Desktop}

@@ -1,13 +1,13 @@
 #!/bin/zsh
-#####
-# My aliases
+#
+# .zaliases - Setup my aliases
 #
 # References
 # - https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789#.vh7hhm6th
 # - https://github.com/webpro/dotfiles/blob/master/system/.alias
 # - https://github.com/mathiasbynens/dotfiles/blob/master/.aliases
 # - https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh
-#####
+#
 
 # directory aliases
 alias -- -='cd -'
