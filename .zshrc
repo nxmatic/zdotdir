@@ -11,10 +11,10 @@ fpath=($ZDOTDIR/functions $fpath)
 autoload -Uz $fpath[1]/*(.:t)
 
 # get minmalist zsh_unplugged plugin manager
+ZUNPLUG_SHORTEN=0
 [[ -d $ZDOTDIR/.unplugged ]] ||
   git clone git@github.com:mattmc3/zsh_unplugged $ZDOTDIR/.unplugged
-#source $ZDOTDIR/.unplugged/zsh_unplugged.zsh
-source ~/Projects/mattmc3/zsh_unplugged/zsh_unplugged.zsh
+source $ZDOTDIR/.unplugged/zsh_unplugged.zsh
 
 # clone-only plugins
 path+=$ZUNPLUG_REPOS/romkatv/zsh-bench
