@@ -1,5 +1,7 @@
 #!/bin/zsh
-# function zsh_history {
+##? zsh_history - Set history options and define history variables.
+
+#function zsh_history {
   # References:
   # - https://github.com/sorin-ionescu/prezto/tree/master/modules/history
 
@@ -30,5 +32,4 @@
   [[ $SAVEHIST -gt 1000 ]] || SAVEHIST=10000
   [[ $HISTSIZE -gt 2000 ]] || HISTSIZE=10000
 
-  alias hist='fc -li'
-# }
+#}

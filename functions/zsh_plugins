@@ -1,31 +1,42 @@
-# get minmalist zsh_unplugged plugin manager
-ZUNPLUG_SHORTEN=0
-ZUNPLUG_HOME=${ZUNPLUG_HOME:-${XDG_DATA_HOME:-~.local/share}/zsh_unplugged}
-[[ -d $ZUNPLUG_HOME/zsh_unplugged ]] ||
-  git clone https://github.com/mattmc3/zsh_unplugged $ZUNPLUG_HOME/zsh_unplugged
+#!/bin/zsh
+##? zsh_plugins - Initialize zsh plugins.
 
-if [[ ! $ZDOTDIR/.zplugins -nt $ZDOTDIR/.zstyles ]]; then
-  (
-    echo regen
-    local plugin
-    local -a my_plugins path_plugins fpath_plugins
-    zstyle -a ':zsh_custom:plugins' load 'my_plugins'
-    zstyle -a ':zsh_custom:plugins' path 'path_plugins'
-    zstyle -a ':zsh_custom:plugins' fpath 'fpath_plugins'
+#function zsh_plugins {
 
-    source $ZUNPLUG_HOME/zsh_unplugged/zsh_unplugged.zsh
-    [[ -f $ZDOTDIR/.zplugins ]] && rm $ZDOTDIR/.zplugins
+  # get minmalist zsh_unplugged plugin manager
+  ZUNPLUG_SHORTEN=0
+  ZUNPLUG_HOME=${ZUNPLUG_HOME:-${XDG_DATA_HOME:-~.local/share}/zsh_unplugged}
+  [[ -d $ZUNPLUG_HOME/zsh_unplugged ]] ||
+    git clone https://github.com/mattmc3/zsh_unplugged $ZUNPLUG_HOME/zsh_unplugged
 
-    plugin-clone $path_plugins $fpath_plugins
-    for plugin in $path_plugins; do
-      echo "path+=$ZUNPLUG_HOME/$plugin" >>| $ZDOTDIR/.zplugins
-    done
-    for plugin in $fpath_plugins; do
-      echo "fpath+=$ZUNPLUG_HOME/$plugin" >>| $ZDOTDIR/.zplugins
-    done
-    plugin-script $my_plugins >>| $ZDOTDIR/.zplugins
+  if [[ ! $ZDOTDIR/.zplugins -nt $ZDOTDIR/.zstyles ]]; then
+    (
+      local plugin
+      local -a my_plugins path_plugins fpath_plugins
+      zstyle -a ':zsh_custom:plugins' load 'my_plugins'
+      zstyle -a ':zsh_custom:plugins' path 'path_plugins'
+      zstyle -a ':zsh_custom:plugins' fpath 'fpath_plugins'
 
-    sed -i "" -e "s|$HOME|~|g" $ZDOTDIR/.zplugins
-  )
-fi
-source $ZDOTDIR/.zplugins
+      source $ZUNPLUG_HOME/zsh_unplugged/zsh_unplugged.zsh
+      [[ -f $ZDOTDIR/.zplugins ]] && rm $ZDOTDIR/.zplugins
+
+      plugin-clone $path_plugins $fpath_plugins
+      for plugin in $path_plugins; do
+        echo "path+=$ZUNPLUG_HOME/$plugin" >>| $ZDOTDIR/.zplugins
+      done
+      for plugin in $fpath_plugins; do
+        echo "fpath+=$ZUNPLUG_HOME/$plugin" >>| $ZDOTDIR/.zplugins
+      done
+      plugin-script $my_plugins >>| $ZDOTDIR/.zplugins
+
+      sed -i "" -e "s|$HOME|~|g" $ZDOTDIR/.zplugins
+    )
+  fi
+  source $ZDOTDIR/.zplugins
+
+#}
+
+function plugin-update {
+  source $ZUNPLUG_HOME/zsh_unplugged/zsh_unplugged.zsh || return 1
+  plugin-update $@
+}
