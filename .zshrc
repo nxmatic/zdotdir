@@ -14,6 +14,7 @@ autoload -Uz $fpath[1]/*(.:t)
 . $ZDOTDIR/.zaliases
 zsh_plugins
 zsh_history
+zsh_confd
 
 # Done profiling.
 [[ ${ZPROFRC:-0} -eq 0 ]] || { unset ZPROFRC && zprof }
