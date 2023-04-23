@@ -34,3 +34,78 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'hydro'
+
+# My prompt
+zstyle ':zsh_custom:plugin:prompt' theme starship
+zstyle ':zsh_custom:plugin:prompt' config hydro
+
+#
+# Plugins
+#
+
+my_plugins=(
+  # regular plugins
+  mattmc3/zfunctions
+  mattmc3/zman
+  rupa/z
+
+  # oh-my-zsh plugins
+  ohmyzsh/ohmyzsh/lib/clipboard.zsh
+  ohmyzsh/ohmyzsh/plugins/copyfile
+  ohmyzsh/ohmyzsh/plugins/copypath
+  ohmyzsh/ohmyzsh/plugins/copybuffer
+  ohmyzsh/ohmyzsh/plugins/magic-enter
+  ohmyzsh/ohmyzsh/plugins/fancy-ctrl-z
+  ohmyzsh/ohmyzsh/plugins/extract
+
+  # prezto
+  sorin-ionescu/prezto/runcoms/zprofile
+  sorin-ionescu/prezto/modules/terminal
+  sorin-ionescu/prezto/modules/editor
+  sorin-ionescu/prezto/modules/directory
+  sorin-ionescu/prezto/modules/history
+
+  # zephyr
+  mattmc3/zephyr/plugins/color
+  mattmc3/zephyr/plugins/homebrew
+  mattmc3/zephyr/plugins/utility
+  zshzoo/macos
+
+  # local plugins
+  python
+
+  # prompt
+  #starship
+  prompt
+
+  # last
+  mattmc3/zephyr/plugins/confd
+  $ZDOTDIR/.zaliases
+
+  sorin-ionescu/prezto/modules/completion
+  # zsh-users/zsh-completions
+  # zshzoo/compinit
+  # zshzoo/compstyle
+
+  # deferred
+  romkatv/zsh-defer
+  olets/zsh-abbr
+  zdharma-continuum/fast-syntax-highlighting
+  #zsh-users/zsh-syntax-highlighting
+  zsh-users/zsh-autosuggestions
+  zsh-users/zsh-history-substring-search
+)
+
+fpath_plugins=(
+  sindresorhus/pure
+)
+
+path_plugins=(
+  romkatv/zsh-bench
+)
+
+zstyle ':zsh_custom:plugins' load $my_plugins
+zstyle ':zsh_custom:plugins' fpath $fpath_plugins
+zstyle ':zsh_custom:plugins' path $path_plugins
+
+unset {my,path,fpath}_plugins
