@@ -45,7 +45,7 @@ zstyle ':zsh_custom:plugin:prompt' config hydro
 
 my_plugins=(
   # regular plugins
-  mattmc3/zfunctions
+  #mattmc3/zfunctions
   mattmc3/zman
   rupa/z
   zshzoo/macos
@@ -60,11 +60,11 @@ my_plugins=(
   ohmyzsh/ohmyzsh/plugins/extract
 
   # prezto
-  sorin-ionescu/prezto/runcoms/zprofile
+  #sorin-ionescu/prezto/runcoms/zprofile
   sorin-ionescu/prezto/modules/terminal
   sorin-ionescu/prezto/modules/editor
   sorin-ionescu/prezto/modules/directory
-  sorin-ionescu/prezto/modules/history
+  #sorin-ionescu/prezto/modules/history
 
   # zephyr
   #mattmc3/zephyr/plugins/editor

@@ -17,7 +17,7 @@
       zstyle -a ':zsh_custom:plugins' path 'path_plugins'
       zstyle -a ':zsh_custom:plugins' fpath 'fpath_plugins'
 
-      source $ZUNPLUG_HOME/zsh_unplugged/zsh_unplugged.zsh
+      source $ZUNPLUG_HOME/zsh_unplugged/zsh_unplugged2.zsh
       [[ -f $ZDOTDIR/.zplugins ]] && rm $ZDOTDIR/.zplugins
 
       plugin-clone $path_plugins $fpath_plugins
@@ -37,6 +37,6 @@
 #}
 
 function plugin-update {
-  source $ZUNPLUG_HOME/zsh_unplugged/zsh_unplugged.zsh || return 1
+  source $ZUNPLUG_HOME/zsh_unplugged/zsh_unplugged2.zsh || return 1
   plugin-update $@
 }
