@@ -48,6 +48,7 @@ my_plugins=(
   mattmc3/zfunctions
   mattmc3/zman
   rupa/z
+  zshzoo/macos
 
   # oh-my-zsh plugins
   ohmyzsh/ohmyzsh/lib/clipboard.zsh
@@ -66,22 +67,16 @@ my_plugins=(
   sorin-ionescu/prezto/modules/history
 
   # zephyr
+  #mattmc3/zephyr/plugins/editor
   mattmc3/zephyr/plugins/color
   mattmc3/zephyr/plugins/homebrew
   mattmc3/zephyr/plugins/utility
-  zshzoo/macos
 
   # local plugins
   python
-
-  # prompt
-  #starship
   prompt
 
-  # last
-  mattmc3/zephyr/plugins/confd
-  $ZDOTDIR/.zaliases
-
+  # completion
   sorin-ionescu/prezto/modules/completion
   # zsh-users/zsh-completions
   # zshzoo/compinit
