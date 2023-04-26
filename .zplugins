@@ -1,95 +1,34 @@
-#
-# .zplugins - antidote plugins file
-#
-
-# Zephyr core
-mattmc3/zephyr path:plugins/zfunctions
-mattmc3/zephyr path:plugins/history
-mattmc3/zephyr path:plugins/environment
-
-# Prompt
-sindresorhus/pure kind:fpath
-romkatv/powerlevel10k kind:fpath
-mattmc3/zephyr path:plugins/prompt
-
-# editor
-ohmyzsh/ohmyzsh path:plugins/fancy-ctrl-z
-ohmyzsh/ohmyzsh path:plugins/magic-enter
-mattmc3/zephyr path:plugins/editor
-
-# my custom plugins
-$ZDOTDIR/plugins/python
-
-# utilities
-mattmc3/zephyr path:plugins/clipboard
-mattmc3/zephyr path:plugins/color
-mattmc3/zephyr path:plugins/homebrew
-mattmc3/zephyr path:plugins/macos conditional:is-macos
-mattmc3/zephyr path:plugins/utility
-romkatv/zsh-bench kind:path
-mattmc3/zman
-#rupa/z
-agkozak/zsh-z
-
-# completions
-mattmc3/zephyr path:plugins/confd
-mattmc3/zephyr path:plugins/completion post:compstyle_zephyr_setup
-
-# deferred plugins
-olets/zsh-abbr kind:defer
-zdharma-continuum/fast-syntax-highlighting kind:defer
-zsh-users/zsh-autosuggestions kind:defer
-zsh-users/zsh-history-substring-search kind:defer
-
-#
-# Alternatives
-#
-
-# Pre-reqs
-# sorin-ionescu/prezto path:modules/helper autoload:functions
-
-# Alt clipboard
-# ohmyzsh/ohmyzsh path:lib/clipboard.zsh
-# ohmyzsh/ohmyzsh path:plugins/copybuffer
-# ohmyzsh/ohmyzsh path:plugins/copyfile
-# ohmyzsh/ohmyzsh path:plugins/copypath
-
-# Alt editor
-# ohmyzsh/ohmyzsh path:plugins/fancy-ctrl-z
-# ohmyzsh/ohmyzsh path:plugins/magic-enter
-# sorin-ionescu/prezto path:modules/editor
-
-# Alt environment
-# sorin-ionescu/prezto path:modules/environment
-# sorin-ionescu/prezto path:runcoms/zprofrc
-
-# Alt history
-# belak/zsh-utils path:history
-# sorin-ionescu/prezto path:modules/history
-
-# Alt macOS
-# zshzoo/macos conditional:is-macos
-# sorin-ionescu/prezto path:modules/osx autoload:functions conditional:is-macos
-# ohmyzsh/ohmyzsh path:plugins/macos conditional:is-macos
-
-# Alt prompts
-# belak/zsh-utils path:prompt
-# sorin-ionescu/prezto path:modules/prompt
-# sindresorhus/pure kind:fpath
-# romkatv/powerlevel10k kind:fpath
-
-# Alt terminal
-# sorin-ionescu/prezto path:modules/terminal
-
-# Alt utility
-# sorin-ionescu/prezto path:modules/utility
-# belak/zsh-utils path:utility
-# ohmyzsh/ohmyzsh path:plugins/extract
-
-# Alt syntax-highlighting
-# zsh-users/zsh-syntax-highlighting
-
-# Alt z
-# rupa/z
-
-# vim: ft=zsh sw=2 ts=2 et
+fpath+=/Users/mmcelheny/.zsh/plugins/zfunctions
+source /Users/mmcelheny/.zsh/plugins/zfunctions/zfunctions.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/prompt
+source /Users/mmcelheny/.zsh/plugins/prompt/prompt.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/clipboard
+source /Users/mmcelheny/.zsh/plugins/clipboard/clipboard.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/directory
+source /Users/mmcelheny/.zsh/plugins/directory/directory.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/editor
+source /Users/mmcelheny/.zsh/plugins/editor/editor.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/history
+source /Users/mmcelheny/.zsh/plugins/history/history.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/utility
+source /Users/mmcelheny/.zsh/plugins/utility/utility.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/terminal
+source /Users/mmcelheny/.zsh/plugins/terminal/terminal.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/homebrew
+source /Users/mmcelheny/.zsh/plugins/homebrew/homebrew.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/macos
+source /Users/mmcelheny/.zsh/plugins/macos/macos.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/python
+source /Users/mmcelheny/.zsh/plugins/python/python.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/completion
+source /Users/mmcelheny/.zsh/plugins/completion/completion.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/_defer_
+source /Users/mmcelheny/.zsh/plugins/_defer_/_defer_.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/abbreviations
+source /Users/mmcelheny/.zsh/plugins/abbreviations/abbreviations.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/syntax-highlighting
+source /Users/mmcelheny/.zsh/plugins/syntax-highlighting/syntax-highlighting.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/autosuggestions
+source /Users/mmcelheny/.zsh/plugins/autosuggestions/autosuggestions.plugin.zsh
+fpath+=/Users/mmcelheny/.zsh/plugins/history-substring-search
+source /Users/mmcelheny/.zsh/plugins/history-substring-search/history-substring-search.plugin.zsh

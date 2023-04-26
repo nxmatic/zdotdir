@@ -1,6 +1,7 @@
 .antidote
 .antidote/
 .cache/
+.custom/
 .external/
 .plugins/
 .unplugged/
