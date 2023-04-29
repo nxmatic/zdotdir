@@ -1,0 +1,48 @@
+#!/usr/bin/env zsh
+
+##? *.d - Use a Fish-like conf.d directory for sourcing configs.
+## zsh
+
+declare -ag _zsh_rcload_context
+
+_zsh_rcload_context+=( $(uname) )
+_zsh_rcload_context+=( $(hostname) )
+_zsh_rcload_context+=( $(id -u -n) )
+
+defun zsh_rcload() {
+    setopt local_options extendedGlob
+
+    defun call() {
+	whence ${_fname} >/dev/null &&
+	    ${_fname}
+    }
+
+    local _dir=${1}
+    local _name=${_dir:t:r}
+
+    [[ -n "${_name:e}" ]] &&
+	_name="${_name:e}"
+
+    # autoload rc files as functions
+    local -a  _fpaths=( "${_dir}"/${_name}(.N) "${_dir}"/*.${_name}(.N) )
+    local -au _fnames=( "${_fpaths[@]:t}" )
+
+    autoload-dir ${_dir}
+
+    # call rc functions for this context
+    {
+	local _fname=
+	for _fname in ${_fnames[@]}; do
+	    call
+	    {
+		local -a _fnames=( ${_fname}~${^_zsh_rcload_context} )
+		for _fname in ${_names}; do
+		    call
+		done
+	    }
+	done
+    }
+}
+
+
+zsh_rcload ${*}

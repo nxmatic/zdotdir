@@ -249,5 +249,5 @@ zstyle ':prezto:module:history' histfile ${XDG_DATA_HOME:=$HOME/.local/share}/zs
 #endregion
 
 # customizations
-zstyle ':zsh_custom:plugin:prompt' theme 'starship'
-zstyle ':zsh_custom:plugin:prompt' config 'hydro'
+zstyle ':zsh_custom:plugin:prompt' theme 'powerlevel10k'
+zstyle ':zsh_custom:plugin:prompt' config 'nxmatic'

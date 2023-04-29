@@ -1,0 +1,67 @@
+#!/usr/bin/env zsh
+# redirect errors to a dedicated file in /tmp
+
+typeset -Ag _zsh_stderr
+
+_zsh_stderr[logdir]=${TMPDIR:a}
+
+defun zsh_stderr() {
+
+    setopt local_options
+    setopt extended_glob warn_create_global typeset_silent \
+           no_short_loops rc_quotes no_auto_pushd numeric_glob_sort \
+           multios
+
+    defun _logfile() {
+	echo ${_zsh_stderr[logdir]}/${_stack[1]}:${$}.stderr
+    }
+
+    #    whence plugin-load &&
+    #   plugin-load xdg
+    #    local sockfile=${XDG_RUNTIME_DIR}/ztrace.sock
+
+    local _cmd=${1-status}
+    local _name=${2:-zsh} &&
+        _name=${_name:t:r}
+
+    local -a _stack &&
+        [[ -n "${_zsh_stderr[stack]}" ]] &&
+        _stack=( ${(@qs:X:)_zsh_stderr[stack]} )
+
+    case $_cmd in
+        open)
+            _stack+=( "$_name" )
+            _zsh_stderr[stack]=${(qj:X:)_stack}
+            (( ${#_stack} != 1 )) &&
+                return
+            exec 3>&2 2>>$(_logfile)
+            ;;
+        close)
+            if (( ${#_stack} > 1 )); then
+               shift -p 1 _stack
+            else
+                _stack=()
+            fi
+            _zsh_stderr[stack]=${(qj:X:)_stack}
+            (( ${#_stack} > 0  )) &&
+                return
+            exec 2>&2 3>&-
+            ;;
+        file)
+            echo $(_logfile)
+	    ;; 
+        cat)
+            cat $(_logfile)
+	    ;;
+        rm)
+            rm -f $(_logfile)
+            ;;
+        status)
+            [[ ${#_stack} -gt 0 ]]
+            ;;
+        *)
+            echo "zsh_stderr: unknown ${_cmd}" # stderr????
+    esac
+}
+
+${0:t} $*
