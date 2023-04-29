@@ -17,7 +17,8 @@ defun zsh_rcload() {
 	    ${_fname}
     }
 
-    local _dir=${1}
+    local _dir=${1} &&
+	{ [[ ! -d ${_dir} ]] &&	return 1 }
     local _name=${_dir:t:r}
 
     [[ -n "${_name:e}" ]] &&
