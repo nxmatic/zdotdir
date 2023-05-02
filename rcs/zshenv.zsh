@@ -20,8 +20,8 @@ export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-$HOME/.xdg}
 # Dotfiles
 #
 
-export ZDOTDIR=~/.zsh
-export DOTFILES=~/.config/dotfiles
+export ZDOTDIR=${ZDOTDIR:-~/.zsh}
+export DOTFILES=${ZDOTFILES:-~/.config/dotfiles}
 
 # Use .zprofile for remaining environment.
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "$ZDOTDIR/.zprofile" ]]; then
