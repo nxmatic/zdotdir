@@ -253,4 +253,4 @@ zstyle ':zsh_custom:plugin:prompt' theme 'starship'
 zstyle ':zsh_custom:plugin:prompt' config 'hydro'
 
 # load contributed styles also
-zrcload ${0:h}/${0:t:r}.d
+zdot-rcload ${0:h}/${0:t:r}.d

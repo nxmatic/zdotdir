@@ -5,12 +5,12 @@ alias zprofrc="ZPROFRC=1 zsh"
 # ZFunctions
 source $ZDOTDIR/plugins/zfunctions/zfunctions.plugin.zsh
 
-zdotdebug zrcload
+zdot-debug enter
 
 # Libs
 for zfile in $ZDOTDIR/lib/*.zsh(N); source $zfile; unset zfile
 
-zrcload ${ZDOTDIR}/conf.d/lib
+zdot-rcload ${ZDOTDIR}/conf.d/lib
 
 # plugins
 function {
@@ -37,14 +37,14 @@ function {
 	macos
 	python
 	completion
-	$customplugins
+	$_customplugins
 	
 	_defer_
 	abbreviations
 	syntax-highlighting
 	autosuggestions
 	history-substring-search
-	$cusyom
+	$_custompluginsdefer
     )
 
     source <(plugin-script $myplugins)
@@ -55,3 +55,5 @@ function {
 
 # done profiling
 [[ ${ZPROFRC:-0} -eq 0 ]] || { unset ZPROFRC && zprof }
+
+zdot-debug leave

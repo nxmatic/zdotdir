@@ -3,13 +3,13 @@
 ##? *.d - Use a Fish-like conf.d directory for sourcing configs.
 ## zsh
 
-declare -ag _zsh_rcload_context
+declare -ag _zdot_rcload_context
 
-_zsh_rcload_context+=( $(uname) )
-_zsh_rcload_context+=( $(hostname) )
-_zsh_rcload_context+=( $(id -u -n) )
+_zdot_rcload_context+=( $(uname) )
+_zdot_rcload_context+=( $(hostname) )
+_zdot_rcload_context+=( $(id -u -n) )
 
-defun zsh_rcload() {
+defun zsh-rcload() {
     setopt local_options extendedGlob
 
     defun call() {
@@ -36,7 +36,7 @@ defun zsh_rcload() {
 	for _fname in ${_fnames[@]}; do
 	    call
 	    {
-		local -a _fnames=( ${_fname}~${^_zsh_rcload_context} )
+		local -a _fnames=( ${_fname}~${^_zdot_rcload_context} )
 		for _fname in ${_names}; do
 		    call
 		done
@@ -46,4 +46,4 @@ defun zsh_rcload() {
 }
 
 
-zsh_rcload ${*}
+zsh-rcload ${*}

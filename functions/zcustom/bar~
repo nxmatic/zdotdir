@@ -1,0 +1,6 @@
+	if [[ -z "${_root}" ]]; then
+	    echo "${_ext}"
+	else
+	    echo "${_root}"
+	fi
+
