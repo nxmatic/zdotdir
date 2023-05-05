@@ -23,15 +23,6 @@ export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-$HOME/.xdg}
 export ZDOTDIR=${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}
 export DOTFILES=${ZDOTFILES:-${XDG_CONFIG_HOME}/dotfiles}
 
-#
-# Load environments available
-#
-local envrc
-for _envrc in ${XDG_CONFIG_HOME}/**/*.zshenv; do
-  source ${_envrc}
-done && unset _envrc
-
-
 # Use .zprofile for remaining environment.
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "$ZDOTDIR/.zprofile" ]]; then
   source "$ZDOTDIR/.zprofile"
