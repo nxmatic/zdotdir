@@ -15,7 +15,7 @@ function {
     local _customplugins
     local _custompluginsdefer
 
-    zstyle -a ':zsh_custom:plugins' load '_customplugins'
+    zstyle -a ':zsh_custom:plugins:load' load '_custompluginsload'
     zstyle -a ':zsh_custom:plugins:defer' load '_custompluginsdefer'
 
     declare -au myplugins
@@ -35,7 +35,7 @@ function {
 	macos
 	python
 	completion
-	$_customplugins
+	$_custompluginsload
 	
 	_defer_
 	abbreviations
