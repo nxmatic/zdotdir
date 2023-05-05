@@ -4,7 +4,9 @@
 
 # Load plugins functions.
 fpath=("${0:A:h}/functions" $fpath)
+
 autoload -Uz $fpath[1]/*(.:t)
+autoload -Uz $fpath[1]/*(@N:t)
 
 # Set ZFUNCDIR.
 : ${ZFUNCDIR:=$ZSH_CUSTOM/functions}
