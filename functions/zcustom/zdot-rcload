@@ -9,7 +9,7 @@ _zdot_rcload_context+=( $(uname) )
 _zdot_rcload_context+=( $(hostname) )
 _zdot_rcload_context+=( $(id -u -n) )
 
-defun zsh-rcload() {
+defun zdot-rcload() {
     setopt local_options extendedGlob
 
     defun call() {
@@ -21,7 +21,7 @@ defun zsh-rcload() {
 	{ [[ ! -d ${_dir} ]] &&	return 1 }
     local _name=${_dir:t:r}
 
-    [[ -n "${_name:e}" ]] &&
+    [ -z "${_name:r}" -a -n "${_name:e}" ] &&
 	_name="${_name:e}"
 
     # autoload rc files as functions
@@ -37,13 +37,16 @@ defun zsh-rcload() {
 	    call
 	    {
 		local -a _fnames=( ${_fname}~${^_zdot_rcload_context} )
-		for _fname in ${_names}; do
+		for _fname in ${_fnames}; do
 		    call
 		done
 	    }
 	done
     }
+
+    # unload rc files
+    autounload-dir ${_dir}
 }
 
 
-zsh-rcload ${*}
+zdot-rcload ${*}
