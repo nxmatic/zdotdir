@@ -10,8 +10,6 @@ zdot-debug enter
 # Libs
 for zfile in $ZDOTDIR/lib/*.zsh(N); source $zfile; unset zfile
 
-zdot-rcload ${ZDOTDIR}/conf.d/lib
-
 # plugins
 function {
     local _customplugins
