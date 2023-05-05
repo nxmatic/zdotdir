@@ -20,7 +20,6 @@ function {
 
     declare -au myplugins
 
-    set -x
     myplugins=(
 	# load plugins
 	zfunctions
@@ -47,7 +46,6 @@ function {
     )
 
     source <(plugin-script $myplugins)
-    set +x
 }
 
 # local settings
