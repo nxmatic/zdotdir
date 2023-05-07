@@ -3,17 +3,16 @@
 ##? *.d - Use a Fish-like conf.d directory for sourcing configs.
 ## zsh
 
-declare -ag _zdot_rcload_context
+0=${${(M)${0::=${(%):-%x}}:#/*}:-$PWD/$0}
 
-_zdot_rcload_context+=( $(uname) )
-_zdot_rcload_context+=( $(hostname) )
-_zdot_rcload_context+=( $(id -u -n) )
+zdot-rcload() {
+    setopt localoptions \
+	   extendedglob warncreateglobal typesetsilent \
+           noshortloops nopromptsubst rcquotes noautopushd numericglobsort \
+           multios
 
-defun zdot-rcload() {
-    setopt local_options extendedGlob
-
-    defun call() {
-	whence ${_fname} >/dev/null &&
+    defun _fncall() {
+	whence -f ${_fname} >/dev/null &&
 	    ${_fname}
     }
 
@@ -34,11 +33,11 @@ defun zdot-rcload() {
     {
 	local _fname=
 	for _fname in ${_fnames[@]}; do
-	    call
+	    _fncall
 	    {
-		local -a _fnames=( ${_fname}~${^_zdot_rcload_context} )
+		local -a _fnames=( ${_fname}~${^_zdotrcload} )
 		for _fname in ${_fnames}; do
-		    call
+		    _fncall
 		done
 	    }
 	done
@@ -48,5 +47,10 @@ defun zdot-rcload() {
     autounload-dir ${_dir}
 }
 
+declare -ag _zdotrcload
+
+_zdotrcload+=( $(uname) )
+_zdotrcload+=( $(hostname) )
+_zdotrcload+=( $(id -u -n) )
 
 zdot-rcload ${*}

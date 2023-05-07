@@ -1,34 +1,31 @@
 #!/bin/zsh
 ##? autoload-dir - autoload all function files in specified directory.
 
+defun autoload-dir() {
+    [[ -d "$1" ]] || return 1
 
-local _me=${0:t}
+    # set in paths
+    fpath=( ${1:q}/{,**/*(/FN)} $fpath)
 
-case ${_me/%-dir/} in
-  autoload)
-    _${_me}() {
-      fpath=("${1:a}" $fpath)
-      autoload -Uz ${1}
+    # define functions autoloaded
+    {
+	defun _ignore() {
+	    case ${_name} in
+		"*\~")    ;&
+		"*\~bak") ;&
+		"*\~*\~")  return 0;;
+		*)       return 1;;
+	    esac
+	}
+
+	local _paths=( ${1:q}/**/*(.N) )
+	local _name
+	for _name in ${_paths:t}; do
+	    _ignore &&
+		continue
+            autoload -Uz ${_name}
+	done
     }
-    ;;
-  autounload)
-    _${_me}() {
-      fpath=( ${fpath#${1:a}} )
-      unset -f ${1}
-    }
-    ;;
-esac
-
-
-defun ${_me}() {
-  [[ -d "$1" ]] || return 1
-  local fn
-  for fn in "$1"/*(.N); do
-    [[ ${fn:t} != '_'* ]] || continue
-    _${0} $fn
-  done
 }
 
-${_me} ${@}
-
-unset _me
+autoload-dir ${@}

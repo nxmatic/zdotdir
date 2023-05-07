@@ -3,6 +3,7 @@
 alias zprofrc="ZPROFRC=1 zsh"
 
 # ZFunctions
+
 source $ZDOTDIR/plugins/zfunctions/zfunctions.plugin.zsh
 
 zdot-debug enter

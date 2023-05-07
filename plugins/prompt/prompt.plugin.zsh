@@ -27,7 +27,9 @@ PS2='${${${(%):-%_}//[^ ]}// /  }    '
 
 # set prompt
 fpath+="${0:A:h}/functions"
-autoload -Uz promptinit && promptinit
+
+autoload -Uz promptinit &&
+    promptinit
 
 if [[ -n "$ZSH_THEME" ]]; then
   _zsh_theme=$ZSH_THEME

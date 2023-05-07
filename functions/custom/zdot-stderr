@@ -1,20 +1,24 @@
 #!/usr/bin/env zsh
 # redirect errors to a dedicated file in /tmp
 
-typeset -Ag _zdotstderr
+0=${${(M)${0::=${(%):-%x}}:#/*}:-$PWD/$0}
 
-_zdotstderr[stack]=
-_zdotstderr[logdir]=${TMPDIR:a}
+zdot-stderr() {
 
-defun zdot-stderr() {
-
-    setopt local_options
-    setopt extended_glob warn_create_global typeset_silent \
-           no_short_loops rc_quotes no_auto_pushd numeric_glob_sort \
+    setopt localoptions \
+	   extendedglob warncreateglobal typesetsilent \
+           noshortloops nopromptsubst rcquotes noautopushd numericglobsort \
            multios
 
+    defun _logdir() {
+	echo $_zdotstderr[logdir]
+    }
+    
     defun _logfile() {
-	echo ${_zdotstderr[logdir]}/${_stack[1]}:${$}.stderr
+	(( ${#_stack} == 0 &&
+	       ${#} == 0 )) &&
+	    return
+	echo $(_logdir)/${1:-${_stack[1]}}:${$}.stderr
     }
 
     #    whence plugin-load &&
@@ -34,7 +38,7 @@ defun zdot-stderr() {
         [[ -n "${_zdotstderr[stack]}" ]] &&
         _stack=( ${(qs:%:)_zdotstderr[stack]} )
 
-    case $_cmd in
+    case ${_cmd} in
         redirect)
             _stack+=( "$_name" )
             _zdotstderr[stack]=${(qj:%:)_stack}
@@ -45,18 +49,21 @@ defun zdot-stderr() {
         reset)
 	    (( ${#_stack} == 0 )) &&
 		return 1
-	    echo "$(_logfile)"
+	    $(_logfile)
 	    if (( ${#_stack} == 1 )); then
 		_stack=()
-		_zdotstderr[stack]=
+		_zdotstderr[stack]=( )
 	    else
 		shift -p 1 _stack
 		_zdotstderr[stack]=${(qj:%:)_stack}
 	    fi
             exec 2>&2 3>&-
             ;;
-        file)
-            echo $(_logfile)
+        logdir)
+            echo $(_logdir)
+	    ;; 
+        logfile)
+            echo $(_logfile) ${*:#${1}}
 	    ;; 
         cat)
             cat $(_logfile)
@@ -69,7 +76,14 @@ defun zdot-stderr() {
             ;;
         *)
             echo "zdot-stderr: unknown ${_cmd}" # stderr????
+	    return 1
+	    ;;
     esac
 }
 
-${0:t} $*
+typeset -Ag _zdotstderr
+
+_zdotstderr[stack]=
+_zdotstderr[logdir]=${TMPDIR:a}
+
+zdot-stderr $*

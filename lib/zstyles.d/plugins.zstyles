@@ -1,0 +1,2 @@
+zstyle ':zsh_custom:plugins' load 'ssh-agent'
+zstyle ':zsh_custom:plugins' defer ''
