@@ -4,26 +4,20 @@
 defun autoload-dir() {
     [[ -d "$1" ]] || return 1
 
+    emulate -L zsh;
+    setopt localoptions extendedglob globdots globstarshort nullglob rcquotes \
+	   nolocalloops
+
     # set in paths
-    fpath=( ${1:q}/{,**/*(/FN)} $fpath)
+    fpath=( ${1:q} ${1:q}/**/*(/FN) $fpath)
 
     # define functions autoloaded
     {
-	defun _ignore() {
-	    case ${_name} in
-		"*\~")    ;&
-		"*\~bak") ;&
-		"*\~*\~")  return 0;;
-		*)       return 1;;
-	    esac
-	}
-
-	local _paths=( ${1:q}/**/*(.N) )
-	local _name
-	for _name in ${_paths:t}; do
-	    _ignore &&
-		continue
-            autoload -Uz ${_name}
+	local -a _paths=( ${1:q} ${1:q}/**/*(.N) ) &&
+	    _paths=( ${_paths[@]:a} )
+	for _name in ${_paths[@]:t}; do
+	    autoload-ignore ||
+		autoload -Uz ${_name}
 	done
     }
 }

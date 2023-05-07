@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+case ${_name} in
+     "*\~")   ;&
+     *\~bak") ;&
+     *\~*\~") true; continue;;
+     *) false;;
+esac
