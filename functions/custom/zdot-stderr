@@ -49,7 +49,7 @@ zdot-stderr() {
         reset)
 	    (( ${#_stack} == 0 )) &&
 		return 1
-	    $(_logfile)
+	    echo $(_logfile)
 	    if (( ${#_stack} == 1 )); then
 		_stack=()
 		_zdotstderr[stack]=( )

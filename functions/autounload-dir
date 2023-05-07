@@ -1,5 +1,5 @@
 #!/bin/zsh
-##? autoload-dir - autoload all function files in specified directory.
+##? autounload-dir - unload all function in specified directory.
 
 
 defun autounload-dir() {
@@ -24,4 +24,22 @@ defun autounload-dir() {
 
 autounload-dir ${@}
 
-unset _thisname
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

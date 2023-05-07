@@ -1,12 +1,7 @@
 #!/usr/bin/env zsh
 
-defun autoload() {
-  (( ${#argv} > 0 )) &&
-    argv+="-t"
-  builtin autoload ${*}
-}
 
-defun ${0:t}() {
+defun zdot-trace() {
     local 0=${(%):-%x}
     local _cmd=${1:-on}
     local _dir="$(realpath ${2:-${0:h}/..})"
@@ -15,12 +10,18 @@ defun ${0:t}() {
 
     case ${_cmd} in
 	on)
+	    defun autoload() {
+		(( ${#argv} > 0 )) &&
+		    argv+="-t"
+		builtin autoload ${*}
+	    }
 	    builtin autoload -t ${_functions}
 	    ;;
 	off)
-	    builtin autoload +t ${_functions}
+	    unset -f autoload
+	    autoload +t ${_functions}
 	    ;;
     esac
 }
 
-${0:t} ${*}
+zdot-trace ${*}
