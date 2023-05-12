@@ -36,8 +36,8 @@ fi
 #
 
 # Set editor variables.
-export EDITOR=vim
-export VISUAL=code
+export EDITOR=emacs
+export VISUAL=emacs
 export PAGER=less
 
 # Browser.

@@ -20,12 +20,15 @@ zstyle :zle:edit-command-line editor ${EDITOR:-vim}
 # Oh-My-Zsh
 #
 
-plugin-load ohmyzsh/ohmyzsh/plugins/magic-enter \
-            ohmyzsh/ohmyzsh/plugins/fancy-ctrl-z
+plugin-load \
+   ohmyzsh/ohmyzsh/plugins/emacs
+
+#plugin-load \
+#   ohmyzsh/ohmyzsh/plugins/fancy-ctrl-z
 
 # magic-enter
-MAGIC_ENTER_GIT_COMMAND='git status -sb'
-MAGIC_ENTER_OTHER_COMMAND='ls'
+#MAGIC_ENTER_GIT_COMMAND='git status -sb'
+#MAGIC_ENTER_OTHER_COMMAND='ls'
 
 #
 # Prezto

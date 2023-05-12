@@ -3,8 +3,6 @@
 ##? *.d - Use a Fish-like conf.d directory for sourcing configs.
 ## zsh
 
-0=${${(M)${0::=${(%):-%x}}:#/*}:-$PWD/$0}
-
 zdot-rcload() {
     setopt localoptions \
 	   extendedglob warncreateglobal typesetsilent \

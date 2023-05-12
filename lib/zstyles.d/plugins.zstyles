@@ -1,2 +1,2 @@
-zstyle ':zsh_custom:plugins' load 'ssh-agent'
-zstyle ':zsh_custom:plugins' defer ''
+zstyle ':zsh_custom:plugins:list' 'main' 'direnv' 'gpg' 'lint' 'zi'
+#zstyle ':zsh_custom:plugins:list' 'defer'
