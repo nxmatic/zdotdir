@@ -1,0 +1,25 @@
+#!/bin/zsh
+##? autounload-dir - unload all function in specified directory.
+
+defun autounload-dir() {
+    [[ -d "$1" ]] ||
+        return 1
+
+    # unset from the path
+    {
+        local _dirs=( ${1:q} ${1:q}/**/*(/FN) )
+        fpath=( ${fpath:|_dirs} )
+    }
+
+    # undefine the functions
+    {
+	local _paths=( ${1:q} ${1:q}/**/*(.N) );
+        for _name in ${_names[@]:t}; do
+	    autoload-ignore ||
+		unset -f ${_fn}
+        done
+    }
+
+}
+
+autounload-dir ${@}

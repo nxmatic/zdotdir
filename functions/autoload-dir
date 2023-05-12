@@ -1,10 +1,25 @@
 #!/bin/zsh
 ##? autoload-dir - autoload all function files in specified directory.
 
-[[ -d "$1" ]] || return 1
-fpath=("$1" $fpath)
-local fn
-for fn in "$1"/*(.N); do
-  [[ ${fn:t} != '_'* ]] || continue
-  autoload -Uz $fn
-done
+defun autoload-dir() {
+    [[ -d "$1" ]] || return 1
+
+    emulate -L zsh;
+    setopt localoptions extendedglob globdots globstarshort nullglob rcquotes \
+	   nolocalloops
+
+    # set in paths
+    fpath=( ${1:q} ${1:q}/**/*(/FN) $fpath)
+
+    # define functions autoloaded
+    {
+	local -a _paths=( ${1:q} ${1:q}/**/*(.N) ) &&
+	    _paths=( ${_paths[@]:a} )
+	for _name in ${_paths[@]:t}; do
+	    autoload-ignore ||
+		autoload -Uz ${_name}
+	done
+    }
+}
+
+autoload-dir ${@}

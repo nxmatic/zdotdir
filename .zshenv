@@ -1,10 +1,18 @@
-#!/bin/zsh
-##? .zshenv - Zsh environment file, loaded always.
+#!/usr/bin/env zsh
 
-export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-~/.config}
-export ZDOTDIR=${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}
+# ensure we're loading the rcs files
 
-# Use .zprofile for remaining environment.
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
+[[ -z "$ZDOTDIR" ]] && 
+    declare -g ZDOTDIR=${0:h} 
+
+# redirect stderr and trace sourced files (lsof -p $$ | grep zshenv)
+
+[[ -n "$ZDOTDEBUG" ]] &&
+    function {
+	source $ZDOTDIR/functions/**/zsh_stderr(N) open zshenv &&
+	    setopt source_trace xtrace
+    }
+
+# source rcs zshenv
+
+source $ZDOTDIR/rcs/zshenv.zsh

@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+
+defun zdot-trace() {
+    local 0=${(%):-%x}
+    local _cmd=${1:-on}
+    local _dir="$(realpath ${2:-${0:h}/..})"
+    local _paths=( ${_dir}/**/*(.N) )
+    local _functions=( ${(q)_paths[@]:t} )
+
+    case ${_cmd} in
+	on)
+	    defun autoload() {
+		(( ${#argv} > 0 )) &&
+		    argv+="-t"
+		builtin autoload ${*}
+	    }
+	    builtin autoload -t ${_functions}
+	    ;;
+	off)
+	    unset -f autoload
+	    autoload +t ${_functions}
+	    ;;
+    esac
+}
+
+zdot-trace ${*}

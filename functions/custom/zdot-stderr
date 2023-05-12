@@ -1,0 +1,89 @@
+#!/usr/bin/env zsh
+# redirect errors to a dedicated file in /tmp
+
+0=${${(M)${0::=${(%):-%x}}:#/*}:-$PWD/$0}
+
+zdot-stderr() {
+
+    setopt localoptions \
+	   extendedglob warncreateglobal typesetsilent \
+           noshortloops nopromptsubst rcquotes noautopushd numericglobsort \
+           multios
+
+    defun _logdir() {
+	echo $_zdotstderr[logdir]
+    }
+    
+    defun _logfile() {
+	(( ${#_stack} == 0 &&
+	       ${#} == 0 )) &&
+	    return
+	echo $(_logdir)/${1:-${_stack[1]}}:${$}.stderr
+    }
+
+    #    whence plugin-load &&
+    #   plugin-load xdg
+    #    local sockfile=${XDG_RUNTIME_DIR}/ztrace.sock
+
+    local _cmd=${1-status}
+    local _tail=${2:-${funcstack[-1]:t}}
+    local _root=${_tail:r}
+    local _ext=${_tail:e}
+    local _name &&
+	[[ -z "${_root}" ]] &&
+	_name="${_ext}" ||
+	_name="${_root}"    
+    
+    local -a _stack &&
+        [[ -n "${_zdotstderr[stack]}" ]] &&
+        _stack=( ${(qs:%:)_zdotstderr[stack]} )
+
+    case ${_cmd} in
+        redirect)
+            _stack+=( "$_name" )
+            _zdotstderr[stack]=${(qj:%:)_stack}
+            (( ${#_stack} != 1 )) &&
+                return
+            exec 3>&2 2>>$(_logfile)
+            ;;
+        reset)
+	    (( ${#_stack} == 0 )) &&
+		return 1
+	    echo $(_logfile)
+	    if (( ${#_stack} == 1 )); then
+		_stack=()
+		_zdotstderr[stack]=( )
+	    else
+		shift -p 1 _stack
+		_zdotstderr[stack]=${(qj:%:)_stack}
+	    fi
+            exec 2>&2 3>&-
+            ;;
+        logdir)
+            echo $(_logdir)
+	    ;; 
+        logfile)
+            echo $(_logfile) ${*:#${1}}
+	    ;; 
+        cat)
+            cat $(_logfile)
+	    ;;
+        rm)
+            rm -f $(_logfile)
+            ;;
+        status)
+            [[ ${#_stack} -gt 0 ]]
+            ;;
+        *)
+            echo "zdot-stderr: unknown ${_cmd}" # stderr????
+	    return 1
+	    ;;
+    esac
+}
+
+typeset -Ag _zdotstderr
+
+_zdotstderr[stack]=
+_zdotstderr[logdir]=${TMPDIR:a}
+
+zdot-stderr $*

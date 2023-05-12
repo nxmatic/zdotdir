@@ -1,0 +1,2 @@
+zstyle ':zsh_custom:plugins:list' 'main' 'direnv' 'gpg' 'lint' 'zi'
+#zstyle ':zsh_custom:plugins:list' 'defer'

@@ -4,8 +4,8 @@
 export DOTFILES=${DOTFILES:-~/.config/dotfiles}
 
 # editors
-export EDITOR=vim
-export VISUAL=code
+export EDITOR=emacs
+export VISUAL=emacs
 
 # go
 export GLOBALGOPATH=$HOME/Projects/golang

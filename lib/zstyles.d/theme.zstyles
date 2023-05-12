@@ -1,0 +1,2 @@
+zstyle ':zsh_custom:plugin:prompt' theme 'powerlevel10k'
+zstyle ':zsh_custom:plugin:prompt' config 'nxmatic'

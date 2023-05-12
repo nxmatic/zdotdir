@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+
+[[ -z "${ZDOTDEBUG:-}" ]] && return 1
+
+zdot-debug() {
+    setopt localoptions extendedglob warncreateglobal \
+	   typesetsilent noshortloops
+
+    local _cmd=${1:-leave}
+
+    case ${_cmd} in
+	enter)
+	    zdot-stderr redirect
+	    zdot-trace on
+	    ;;
+	leave)
+	    zdot-trace off
+	    zdot-stderr reset
+	    ;;
+    esac
+}
+
+0=${${(M)${0::=${(%):-%x}}:#/*}:-$PWD/$0}
+
+zdot-debug ${*}

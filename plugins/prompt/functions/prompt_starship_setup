@@ -12,10 +12,13 @@ fi
 
 # Set the config
 local prompt_config
-zstyle -s ':zsh:prompt:starship' config prompt_config
+zstyle -s ':zsh_custom:plugin:prompt' config prompt_config
 if [[ -n "$prompt_config" ]]; then
-  prompt_config=$ZDOTDIR/themes/${prompt_config}.toml
-  [[ -f $prompt_config ]] && export STARSHIP_CONFIG=$prompt_config
+  local -a inits=(
+    $ZDOTDIR/themes/${prompt_config}.toml(N)
+    ${0:A:h:h}/themes/${prompt_config}.toml(N)
+  )
+  (( $#inits )) && export STARSHIP_CONFIG=$inits[1]
 fi
 
 #eval "$(starship init zsh)"

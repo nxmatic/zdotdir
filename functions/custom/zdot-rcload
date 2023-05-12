@@ -1,0 +1,54 @@
+#!/usr/bin/env zsh
+
+##? *.d - Use a Fish-like conf.d directory for sourcing configs.
+## zsh
+
+zdot-rcload() {
+    setopt localoptions \
+	   extendedglob warncreateglobal typesetsilent \
+           noshortloops nopromptsubst rcquotes noautopushd numericglobsort \
+           multios
+
+    defun _fncall() {
+	whence -f ${_fname} >/dev/null &&
+	    ${_fname}
+    }
+
+    local _dir=${1} &&
+	{ [[ ! -d ${_dir} ]] &&	return 1 }
+    local _name=${_dir:t:r}
+
+    [ -z "${_name:r}" -a -n "${_name:e}" ] &&
+	_name="${_name:e}"
+
+    # autoload rc files as functions
+    local -a  _fpaths=( "${_dir}"/${_name}(.N) "${_dir}"/*.${_name}(.N) )
+    local -au _fnames=( "${_fpaths[@]:t}" )
+
+    autoload-dir ${_dir}
+
+    # call rc functions for this context
+    {
+	local _fname=
+	for _fname in ${_fnames[@]}; do
+	    _fncall
+	    {
+		local -a _fnames=( ${_fname}~${^_zdotrcload} )
+		for _fname in ${_fnames}; do
+		    _fncall
+		done
+	    }
+	done
+    }
+
+    # unload rc files
+    autounload-dir ${_dir}
+}
+
+declare -ag _zdotrcload
+
+_zdotrcload+=( $(uname) )
+_zdotrcload+=( $(hostname) )
+_zdotrcload+=( $(id -u -n) )
+
+zdot-rcload ${*}
