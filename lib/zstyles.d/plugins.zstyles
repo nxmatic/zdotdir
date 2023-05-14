@@ -1,2 +1,3 @@
-zstyle ':zsh_custom:plugins:list' 'main' 'direnv' 'gpg' 'lint' 'zi'
-#zstyle ':zsh_custom:plugins:list' 'defer'
+zstyle ':zsh_custom:plugins:load' 'main' 'direnv' 'gpg' 'lint' 'zi' 'ninrod/pass-zsh-completion'
+zstyle ':zsh_custom:plugins:load' 'defer' 
+

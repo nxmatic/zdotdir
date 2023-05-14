@@ -13,13 +13,13 @@ for zfile in $ZDOTDIR/lib/*.zsh(N); source $zfile; unset zfile
 
 # plugins
 function {
-    local _customplugins
-    local _custompluginsdefer
+    local _plugins
+    local _defer
 
-    zstyle -a ':zsh_custom:plugins:list' 'main'  '_custompluginsmain'
-    zstyle -a ':zsh_custom:plugins:list' 'defer' '_custompluginsdefer'
+    zstyle -a ':zsh_custom:plugins:load' 'main'  '_plugins'
+    zstyle -a ':zsh_custom:plugins:load' 'defer' '_defer'
     
-    declare -au myplugins
+    local -au myplugins
 
     myplugins=(
 	# load plugins
@@ -36,16 +36,15 @@ function {
 	macos
 	python
 	completion
-	$_custompluginsmain
+	$_plugins
 	
 	_defer_
 	abbreviations
 	syntax-highlighting
 	autosuggestions
 	history-substring-search
-	$_custompluginsdefer
+	$_defer
     )
-
     source <(plugin-script $myplugins)
 }
 
