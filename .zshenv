@@ -7,11 +7,11 @@
 
 # redirect stderr and trace sourced files (lsof -p $$ | grep zshenv)
 
-[[ -n "$ZDOTDEBUG" ]] &&
-    function {
-	source $ZDOTDIR/functions/**/zsh_stderr(N) open zshenv &&
-	    setopt source_trace xtrace
-    }
+# [[ -n "$ZDOTDEBUG" ]] &&
+#     function {
+# 	source $ZDOTDIR/functions/**/zsh_stderr(N) open zshenv &&
+# 	    setopt source_trace xtrace
+#     }
 
 # source rcs zshenv
 
