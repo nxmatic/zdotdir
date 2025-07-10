@@ -5,7 +5,7 @@
 # Set XDG base dirs.
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
-export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.local/cache}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-$HOME/.xdg}
@@ -57,7 +57,8 @@ alias wget="${aliases[wget]:-wget} --hsts-file=\"\$XDG_CACHE_HOME/wget/wget-hsts
 #
 
 # gpg
-export GNUPGHOME="${GNUPGHOME:-$XDG_DATA_HOME/gnupg}"
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+export GNUPGHOME="${GNUPGHOME:-$XDG_RUNTIME_DIR/gnupg}"
 alias gpg="${aliases[gpg]:-gpg} --homedir \"\$GNUPGHOME\""
 
 # jupyter

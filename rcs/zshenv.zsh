@@ -7,7 +7,7 @@
 # ln -sf ~/.config/zsh/.zshenv ~/.zshenv
 
 ## nix: Environment variables
-. "/etc/profiles/per-user/nxmatic/etc/profile.d/hm-session-vars.sh"
+. "/etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh"
 
 # Only source this once
 if [[ -z "$__HM_ZSH_SESS_VARS_SOURCED" ]]; then

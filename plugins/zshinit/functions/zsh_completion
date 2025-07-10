@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 ##? zsh_completion - set zsh built-in completion system
-#function zsh_completion {
+function zsh_completion {
   local zopts=(
     # 16.2.2 Completion
     always_to_end           # Move cursor to the end of a completed word.
@@ -47,4 +47,4 @@
       zcompile "$ZSH_COMPDUMP"
     fi
   } &!
-#}
+}

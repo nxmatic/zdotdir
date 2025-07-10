@@ -12,14 +12,14 @@ defun zdot-trace() {
 	on)
 	    defun autoload() {
 		(( ${#argv} > 0 )) &&
-		    argv+="-t"
-		builtin autoload ${*}
+		  argv=( "-t"  "${argv[@]}" )
+		builtin autoload "${*}"
 	    }
-	    builtin autoload -t ${_functions}
+	    builtin autoload -t "${_functions[@]}"
 	    ;;
 	off)
 	    unset -f autoload
-	    autoload +t ${_functions}
+	    autoload +t "${_functions[@]}"
 	    ;;
     esac
 }

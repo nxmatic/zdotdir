@@ -16,3 +16,4 @@
 # source rcs zshenv
 
 source $ZDOTDIR/rcs/zshenv.zsh
+#source "/Users/$USER/.local/share/cargo/env"

@@ -8,5 +8,6 @@ for plugdir in $@; do
   [[ $plugdir = /* ]] || plugdir=$ZPLUGINDIR/$plugdir
   fpath+=$plugdir
   local initfile=$plugdir/${plugdir:t}.plugin.zsh
+  echo "loading $initfile"
   (( $+functions[zsh-defer] )) && zsh-defer . $initfile || . $initfile
 done
