@@ -13,4 +13,20 @@ fi
 [[ -f $_prompt_config ]] && source $_prompt_config
 #unset _prompt_config
 
+# Ensure gitstatus is available for Powerlevel10k VCS segment performance/features
+# Custom loading of gitstatus to work around parameter issue
+function _safe_load_gitstatus() {
+  local gitstatus_plugin_file
+  # Get the actual plugin file path
+  plugin-clone romkatv/gitstatus >&2
+  gitstatus_plugin_file="$ZUNPLUG_HOME/gitstatus/gitstatus.plugin.zsh"
+  
+  if [[ -f "$gitstatus_plugin_file" ]]; then
+    # Source with a parameter to avoid the ${1:-} issue
+    source "$gitstatus_plugin_file" gitstatus_safe
+  else
+    echo >&2 "Warning: gitstatus plugin not found at $gitstatus_plugin_file"
+  fi
+}
+_safe_load_gitstatus
 plugin-load romkatv/powerlevel10k
