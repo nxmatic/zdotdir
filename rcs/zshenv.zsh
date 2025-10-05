@@ -7,12 +7,14 @@
 # ln -sf ~/.config/zsh/.zshenv ~/.zshenv
 
 ## nix: Environment variables
-. "/etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh"
+
+: ${HM_SESSION_VARS:=${HM_SESSION_VARS:-"/etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh"}}
+[[ -r "${HM_SESSION_VARS}" ]] && 
+  source "${HM_SESSION_VARS}"
 
 # Only source this once
 if [[ -z "$__HM_ZSH_SESS_VARS_SOURCED" ]]; then
   export __HM_ZSH_SESS_VARS_SOURCED=1
-
 fi
 
 #
