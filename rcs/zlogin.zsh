@@ -3,6 +3,9 @@
 #
 # https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zlogin
 
+# Initialize keychain automatically
+source <( keychain --eval --quiet ~/.lima/_config/user )
+
 # Execute code that does not affect the current session in the background.
 {
   # Compile the completion dump to increase startup speed.

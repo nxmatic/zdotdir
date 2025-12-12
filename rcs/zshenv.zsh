@@ -18,6 +18,11 @@ if [[ -z "$__HM_ZSH_SESS_VARS_SOURCED" ]]; then
 fi
 
 #
+# terminfo
+# 
+export TERM=xterm-256color # we always have it
+
+#
 # XDG base dirs
 #
 
