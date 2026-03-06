@@ -41,7 +41,7 @@ function {
 
     zstyle -a ':zsh_custom:plugins:load' 'main'  '_plugins'
     zstyle -a ':zsh_custom:plugins:load' 'defer' '_defer'
-    
+
     local -au myplugins
 
     myplugins=(
@@ -60,7 +60,7 @@ function {
 	python
 	completion
 	$_plugins
-	
+
 	_defer_
 	abbreviations
 	syntax-highlighting
@@ -89,3 +89,11 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# BEGIN nix-darwin-home PATH normalize
+# Normalize PATH after plugin mutations.
+typeset -U path
+path=( ${path:#/Users/stephane.lacoin/*} )
+path=( "$HOME/.local/bin" "$HOME/.local/share/pnpm" "$HOME/.local/opt/lima-vm/bin" "$HOME/.nix-profile/bin" /run/wrappers/bin /run/current-system/sw/bin "/etc/profiles/per-user/$USER/bin" "${path[@]}" )
+export PATH="${(j/:/)path}"
+# END nix-darwin-home PATH normalize
