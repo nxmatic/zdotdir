@@ -83,7 +83,7 @@ zdot-debug leave
 [[ ! -f ~/.config/zsh/plugins/prompt/themes/nxmatic.p10k.zsh ]] || source ~/.config/zsh/plugins/prompt/themes/nxmatic.p10k.zsh
 
 # pnpm
-export PNPM_HOME="/Users/stephane.lacoin/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
