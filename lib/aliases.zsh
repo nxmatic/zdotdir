@@ -161,10 +161,8 @@ alias pyva="source .venv/bin/activate"
 alias t="todo.sh"
 alias todos="$VISUAL $HOME/Desktop/todo.txt"
 
-# vscode
-if [[ "$OSTYPE" == darwin* ]]; then
-  alias code="open -b com.microsoft.VSCode"
-fi
+# vscode: see functions/code. Deliberately NOT an alias — zsh expands an alias before it
+# looks a function up, so an alias here would shadow that function everywhere.
 
 # Load more specific zsh 'run-help' function.
 (( $+aliases[run-help] )) && unalias run-help && autoload -Uz run-help

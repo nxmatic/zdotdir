@@ -1,3 +1,23 @@
 #!/bin/zsh
-# vscode
-open -b com.microsoft.VSCode $@
+# vscode — Insiders is the runtime on every fabric-segment host (the rdp hosts included),
+# so `code` must open Insiders, not stable (bundle id com.microsoft.VSCode).
+#
+# Use the app's OWN cli rather than `open -b`: `open` discards the arguments a CLI
+# understands, including `-g file:line` and `--wait` — which is exactly what editor
+# integrations and $GIT_EDITOR send. Several candidates, because the app is per-user on
+# some hosts and system-wide on others; `open -b` stays as the last resort.
+#
+# ⛔ Never `exec` here: this runs in the interactive shell, and exec would REPLACE it —
+# the terminal dies as soon as the cli returns. (Measured, by doing exactly that.)
+local candidate
+for candidate in \
+  "$HOME/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin/code" \
+  "/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin/code" \
+  "${commands[code-insiders]}"; do
+  if [[ -n "$candidate" && -x "$candidate" ]]; then
+    "$candidate" "$@"
+    return
+  fi
+done
+
+open -b com.microsoft.VSCodeInsiders "$@"
