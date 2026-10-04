@@ -23,3 +23,8 @@
 .zplugins.zsh
 ~*
 .zephyr/
+
+# Written by nix-darwin-home at activation ("do not edit manually") and sourced by
+# rcs/zshrc.zsh. Generated, so it must never be committed here — a committed copy would
+# fight its generator at the next switch.
+/.zshrc.part.zsh
