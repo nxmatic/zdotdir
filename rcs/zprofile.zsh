@@ -35,10 +35,6 @@ fi
 # Ensure xdg local path 
 export PATH=$XDG_BIN_HOME:$PATH
 
-# lima
-export LIMA_OPT=~/.local/opt/lima-vm
-export PATH=${LIMA_OPT}/bin:$PATH
-
 #
 # Common
 #

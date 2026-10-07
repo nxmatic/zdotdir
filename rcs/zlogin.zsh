@@ -3,11 +3,8 @@
 #
 # https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zlogin
 
-# ⛔ No keychain init here. It used to source `keychain --eval ~/.lima/_config/user`, which
-# is dead twice over: Lima is retired (the fleet is Tart-only, and ~/.lima is gone), and
-# the ssh agent is owned by nix-darwin-home (modules/home-manager/keychain.nix) — which
-# runs it and loads the real keys. Measured: SSH_AUTH_SOCK points at ~/.keychain and
-# `ssh-add -l` lists them.
+# No keychain init here: the ssh agent is owned by nix-darwin-home
+# (modules/home-manager/keychain.nix).
 
 # Execute code that does not affect the current session in the background.
 {

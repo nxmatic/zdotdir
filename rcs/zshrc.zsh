@@ -95,6 +95,6 @@ esac
 # Normalize PATH after plugin mutations.
 typeset -U path
 path=( ${path:#/Users/stephane.lacoin/*} )
-path=( "$HOME/.local/bin" "$HOME/.local/share/pnpm" "$HOME/.local/opt/lima-vm/bin" "$HOME/.nix-profile/bin" /run/wrappers/bin /run/current-system/sw/bin "/etc/profiles/per-user/$USER/bin" "${path[@]}" )
+path=( "$HOME/.local/bin" "$HOME/.local/share/pnpm" "$HOME/.nix-profile/bin" /run/wrappers/bin /run/current-system/sw/bin "/etc/profiles/per-user/$USER/bin" "${path[@]}" )
 export PATH="${(j/:/)path}"
 # END nix-darwin-home PATH normalize
